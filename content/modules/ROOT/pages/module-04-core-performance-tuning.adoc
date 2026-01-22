@@ -612,6 +612,14 @@ spec:
   containers:
   - name: tuned-container
     image: {{.containerImage}}
+    securityContext:
+      runAsNonRoot: true
+      seccompProfile:
+        type: "RuntimeDefault"
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
     command: ["sleep"]
     args: ["300"]
     resources:
